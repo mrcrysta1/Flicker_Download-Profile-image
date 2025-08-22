@@ -20,7 +20,7 @@ wheels/
 .installed.cfg
 *.egg
 MANIFEST
-
+flickr_downloads/
 # Virtual environments
 .env
 .venv
