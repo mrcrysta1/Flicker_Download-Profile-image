@@ -2,25 +2,45 @@ import os
 import requests
 from bs4 import BeautifulSoup
 
-# Flickr profile (public photos)
-profile_url = "https://www.flickr.com/photos/32271947@N06/"
+username = ""   # Flickr user ID
+base_url = f"https://www.flickr.com/photos/{username}/"
 
-resp = requests.get(profile_url)
-soup = BeautifulSoup(resp.text, "html.parser")
+all_images = set()
 
-images = set()
-for img in soup.find_all("img"):
-    link = img.get("src")
-    if link and "staticflickr.com" in link:
-        if link.startswith("//"):   # <-- Fix for missing schema
-            link = "https:" + link
-        images.add(link)
+page = 1
+while True:
+    url = f"{base_url}page{page}"
+    print(f"Fetching {url} ...")
+    resp = requests.get(url)
+    if resp.status_code != 200:
+        break
 
-# Make folder
+    soup = BeautifulSoup(resp.text, "html.parser")
+    imgs = soup.find_all("img")
+
+    count_before = len(all_images)
+
+    for img in imgs:
+        link = img.get("src")
+        if link and "staticflickr.com" in link:
+            if link.startswith("//"):
+                link = "https:" + link
+            # force large size (_b)
+            link = link.rsplit("_", 1)[0] + "_b.jpg"
+            all_images.add(link)
+
+    # agar new images add hi nahi hui to stop
+    if len(all_images) == count_before:
+        break
+
+    page += 1
+
+print(f"Total found: {len(all_images)} photos")
+
+# Download folder
 os.makedirs("flickr_downloads", exist_ok=True)
 
-# Download all images
-for i, img_url in enumerate(images):
+for i, img_url in enumerate(all_images):
     try:
         data = requests.get(img_url).content
         with open(f"flickr_downloads/photo_{i}.jpg", "wb") as f:
@@ -29,4 +49,4 @@ for i, img_url in enumerate(images):
     except Exception as e:
         print(f"Failed {img_url}: {e}")
 
-print(f"\n✅ Done! {len(images)} images downloaded.")
+print("\n✅ Done! All available photos downloaded.")
