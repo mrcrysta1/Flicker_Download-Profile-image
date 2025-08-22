@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 # Pakistan Trading & SECP Alerts → Email (Roman Urdu)
 
 Ye script RSS/news sources ko watch karta hai aur jab nayi khabar mile to **short Roman Urdu** summary bana kar **Gmail** se email karta hai.
@@ -55,3 +56,6 @@ Aap `/mnt/data/news_alert_email/monitor_news.py` me `SOURCE_FEEDS` aur `SECP_PRE
 - AI summary optional hai; aap free/local models bhi laga sakte ho.
 
 — Made for Ali (Roman Urdu alerts) ♥
+=======
+# Flicker_Download-Profile-image
+>>>>>>> 1ef247c9d8c7fb97937a539adec6ec5489711c83
