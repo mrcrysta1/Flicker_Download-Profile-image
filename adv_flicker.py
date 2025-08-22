@@ -4,7 +4,7 @@ import requests
 from selenium import webdriver
 from bs4 import BeautifulSoup
 
-username = "32271947@N06"
+username = ""
 base_url = f"https://www.flickr.com/photos/{username}/"
 
 all_images = set()
