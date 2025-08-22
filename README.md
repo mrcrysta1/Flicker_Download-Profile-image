@@ -30,6 +30,6 @@ This project includes two versions of the tool:
 ## 📦 Installation
 Clone the repository and install dependencies:
 ```bash
-git clone https://github.com/yourusername/flickr-downloader.git
-cd flickr-downloader
+git clone https://github.com/mrcrysta1/Flicker_Download-Profile-image.git
+cd Flicker_Download-Profile-image
 pip install -r requirements.txt
